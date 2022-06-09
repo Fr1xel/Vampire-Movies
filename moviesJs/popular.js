@@ -12,10 +12,15 @@ async function PopularMoviesFetch(){
 
 function HtmlDisplay(data){
     data.forEach(movie => {
+        const percent = movie.vote_average * 10
         console.log(movie)
         const output = `<div class="col-lg-3 col-md-6 col-12 cursor-pointer hover-bigger">
         <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="img-fluid border-radius">
-        <h5>${movie.original_title}</h5>
+        <h5 class="p-3 silver-border">${movie.original_title}</h5>
+        <p class="lead">
+        <span class="fw-bold">Rating:</span>
+         ${percent}%
+         </p>
         </div>
         `
         popularDiv.innerHTML += output
