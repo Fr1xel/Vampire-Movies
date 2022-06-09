@@ -55,10 +55,6 @@ body{
 .hover-bigger{
     transition:0.5s;
 }
-.hover-bigger:hover{
-    transform:scale(1.1);
-    filter:brightness(1.1)
-}
 .blood{
     color:silver;
        text-shadow:
@@ -107,6 +103,10 @@ body{
     }
 }
 @media only screen and (min-width:1024px){
+    .hover-bigger:hover{
+        transform:scale(1.1);
+        filter:brightness(1.1)
+    }
     .input-top{
         width:40%;
     }
