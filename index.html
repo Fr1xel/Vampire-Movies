@@ -17,6 +17,7 @@
     />
     <link rel="stylesheet" href="moviesCss/popular.css" />
     <link rel="stylesheet" href="/moviesCss/nowPlaying.css">
+    <link rel="stylesheet" href="/moviesCss/topRated.css">
     <title>The Vampire Movies</title>
   </head>
   <body>
@@ -44,6 +45,9 @@
             </li>
             <li class="nav-item">
               <a href="#nowPlaying" class="nav-link reddish-text">Now playing</a>
+            </li>
+            <li class="nav-item">
+              <a href="#nowPlaying" class="nav-link reddish-text">Top rated</a>
             </li>
           </ul>
         </div>
@@ -86,7 +90,7 @@
     >
       <div class="container">
         <div class="border-radius">
-          <h1 class="redder-text">Popular Movies</h1>
+          <h1 class="redder-text">Popular Movies <i class="bi bi-bar-chart"></i></h1>
           <div
             class="row g-5 text-center pt-3 max-width-100 m-auto"
             id="popularDiv"
@@ -109,17 +113,34 @@
 
     <section class="mt-5 text-align-start text-light max-width-100">
       <div class="container">
-      <h1 class="color-red">Now Playing</h1>
+      <h1 class="color-red">Now Playing <i class="bi bi-clock"></i></h1>
       <div class="d-flex scroll-right py-3 text-center" id="nowPlaying">
       </div>
     </div>
     </section>
+
+    <section class="mt-5 cartoon-background text-center text-light p-5">
+      <div class="p-5">
+      <h1>Brighten up you day</h1>
+      <h2>Whit a good cartoon</h2>
+<button class="button-36 mt-5" role="button">Brighten up my day</button>
+</div>
+    </section>
+
+    <section class="text-light text-align-start mt-5">
+      <div class="container">
+        <h1 class="color-red">Top rated <i class="bi bi-star"></i></h1>
+        <div class="d-flex justify-content-center g-5 mt-5 text-center" id="topRated"></div>
+      </div>
+    </section>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
     ></script>
-    <script src="moviesJs/popular.js"></script>
+    <script src="/moviesJs/popular.js"></script>
     <script src="/moviesJs/nowPlaying.js"></script>
+    <script src="/moviesJs/topRated.js"></script>
   </body>
 </html>

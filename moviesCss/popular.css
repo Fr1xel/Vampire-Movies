@@ -110,7 +110,7 @@ body{
     background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(/images/series.img);
     background-size:cover;
     background-repeat:no-repeat;
-    background:filter(brightness(0.5))
+    background-position: center;
   }
 .silver-border{
     border-bottom: 1px solid rgb(57, 56, 56);

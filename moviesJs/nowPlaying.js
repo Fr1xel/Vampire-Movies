@@ -11,7 +11,7 @@ async function NowPlayingFetch(){
 
 function HtmlSetup(movie){
     movie.forEach(movie => {
-        const output = `<div class="col-lg-2 col-md-4 col-6 mx-4 d-inline-block">
+        const output = `<div class="col-lg-2 col-md-4 col-6 mx-4 d-inline-block hover-bigger">
         <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="img-fluid border-radius">
         <p class="lead">${movie.title}</p>
         </div>
