@@ -53,6 +53,12 @@ body{
     border: 1px solid #ccc;
     border-radius:2rem;
 }
+.header-background{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(/images/movie-header.jpg);
+    background-size: cover;	
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .cursor-pointer{
     cursor: pointer;
 }
