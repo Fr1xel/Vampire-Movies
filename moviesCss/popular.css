@@ -3,6 +3,15 @@ body::before{
     content: "";
     height: 60px;
 }
+body::-webkit-scrollbar{
+    background-color:black;
+    width:10px;
+
+}
+body::-webkit-scrollbar-thumb{
+    background-color:#C00000;
+    border-radius:1rem;
+}
 body{
     background-color:black;
 }
@@ -10,10 +19,8 @@ body{
     color:red;
     filter: drop-shadow(0 0 1rem rgb(255, 0, 0));
 }
-.header-picture{
-    width:100%;
-    height:30rem;
-    z-index: -9999;
+.shadow-picture{
+    box-shadow: 5px 0 5px -5px #333;
 }
 .width-manager{
     width:80%;
@@ -78,6 +85,33 @@ body{
        4px 20px 1px #FE0000,
        4px 21px 2px #FF0000;
 }
+.button-34 {
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+  }
+  .picture-background{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(/images/series.img);
+    background-size:cover;
+    background-repeat:no-repeat;
+    background:filter(brightness(0.5))
+  }
 .silver-border{
     border-bottom: 1px solid rgb(57, 56, 56);
 }

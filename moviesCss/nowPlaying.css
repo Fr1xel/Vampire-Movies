@@ -1,0 +1,13 @@
+.scroll-right{
+    flex-wrap: nowrap;
+    overflow-x:auto;
+    overflow-y: hidden;
+}
+.scroll-right::-webkit-scrollbar{
+    background-color: black;
+    height:10px;
+}
+.scroll-right::-webkit-scrollbar-thumb{
+    background-color: rgba(128, 128, 128, 0.501);
+    border-radius: 1rem;
+}
