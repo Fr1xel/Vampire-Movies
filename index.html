@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="moviesCss/popular.css" />
     <link rel="stylesheet" href="/moviesCss/nowPlaying.css" />
     <link rel="stylesheet" href="/moviesCss/topRated.css" />
+    <link rel="stylesheet" href="/moviesCss/search.css">
     <title>The Vampire Movies</title>
   </head>
   <body>
@@ -67,7 +68,7 @@
             </h1>
             <i class="bi bi-arrow-bar-down fs-1 color-red"></i>
             <form action="">
-              <input type="text" class="input-top" />
+              <input type="text" class="input-top" id="movieSearch" />
             </form>
           </div>
         </div>
@@ -84,6 +85,9 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="mt-5 text-align-start text-light max-width-100" id="searchDiv">
     </section>
 
     <section
@@ -106,13 +110,12 @@
     <section class="mt-5 text-center text-light picture-background">
       <div class="d-flex p-5">
         <div class="container py-5">
-          <div class="mr-5">
             <h1>Tired of movies?</h1>
+            <br>
             <h2>Watch a series instead:</h2>
             <button class="button-34 mt-5" role="button">
               I want to watch a series
             </button>
-          </div>
         </div>
       </div>
     </section>
@@ -127,6 +130,7 @@
     <section class="mt-5 cartoon-background text-center text-light p-5">
       <div class="p-5">
         <h1>Brighten up you day</h1>
+        <br>
         <h2>Whit a good cartoon</h2>
         <button class="button-36 mt-5" role="button">Brighten up my day</button>
       </div>
@@ -205,5 +209,6 @@
     <script src="/moviesJs/popular.js"></script>
     <script src="/moviesJs/nowPlaying.js"></script>
     <script src="/moviesJs/topRated.js"></script>
+    <script src="/moviesJs/search.js"></script>
   </body>
 </html>
