@@ -4,6 +4,7 @@ const searchDiv = document.querySelector("#searchDiv")
 function searchType(event){
     if(event.keyCode === 13){
         event.preventDefault()
+        getSearch()
     }
     else{
         if(searchBarFilms.value.length > 2){
