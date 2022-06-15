@@ -37,8 +37,8 @@ function HtmlDisplay(data){
 function infoModel(title, background, overview){
     const modal = document.querySelector("#viewModel")
     modal.innerHTML = `
-    <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9999 darker-background text-light overflow-y-scroll">
-    <div class="w-90 h-60 text-center dark-background-poster position-relative">
+    <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9999 darker-background text-light">
+    <div class="w-90 h-60 text-center dark-background-poster position-relative overflow-y-scroll">
     <button class="position-absolute tl-0 button-close"><i class="bi bi-x"></i></button>
     <div class="container">
     <h1 class="p-5">${title}</h1>
