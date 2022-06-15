@@ -15,6 +15,17 @@ body::-webkit-scrollbar-thumb{
 body{
     background-color:black;
 }
+.z-9999{
+    z-index:9999;
+}
+.position-fixed-center{
+    position:fixed;
+    top: 0;
+    left:0;
+}
+.darker-background{
+    background-color:rgba(0, 0, 0, 0.71);
+}
 .color-red{
     color:red;
     filter: drop-shadow(0 0 1rem rgb(255, 0, 0));
@@ -52,6 +63,25 @@ body{
     text-align: center;
     border: 1px solid #ccc;
     border-radius:2rem;
+}
+.button-close{
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+}
+.overflow-y-scroll{
+    overflow-y:scroll;
+}
+.w-90{
+    width:90%;
+}
+.h-60{
+    height:80%;
+}
+.tl-0{
+    top:0;
+    left:0;
 }
 .header-background{
     background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(/images/movie-header.jpg);

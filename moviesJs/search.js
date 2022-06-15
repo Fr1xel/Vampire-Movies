@@ -32,10 +32,16 @@ function searchHtmlBuild(data){
     `
     const searchContent = document.querySelector("#searchContent")
     data.forEach(movie => {
-        const p = document.createElement("p")
+        let percent = movie.vote_average * 10
+        if(movie.vote_average > 0){
+            percent = movie.vote_average * 10
+        }
+        const p = document.createElement("h5")
+        const p2 = document.createElement("p")
+        p2.innerHTML = `<span class="fw-bold">Rating:</span> ${percent}%`
         p.innerHTML = `${movie.title}`
         const imageDiv = document.createElement("div")
-        imageDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger")
+        imageDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger", "click-info")
         imageDiv.id = "imagePlace"
         const img = document.createElement("img")
         img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -45,10 +51,20 @@ function searchHtmlBuild(data){
         imageDiv.append(img)
         searchContent.append(imageDiv)
         imageDiv.append(p)
+        p2.classList.add("lead")
+        p.classList.add("p-3", "silver-border", "fw-bold") 
+        imageDiv.append(p2)
+        imageDiv.value = movie.id
         if(!movie.poster_path){
             img.src = "/images/no-image.png"
         }
     })
+    data.forEach(movie => {
+        document.querySelectorAll(".click-info").forEach(div => {
+            if(movie.id === div.value){
+                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview)})
+        }})
+        })
 }
 
 searchBarFilms.addEventListener("keypress", searchType)
