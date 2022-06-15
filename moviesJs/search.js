@@ -62,7 +62,7 @@ function searchHtmlBuild(data){
     data.forEach(movie => {
         document.querySelectorAll(".click-info").forEach(div => {
             if(movie.id === div.value){
-                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview)})
+                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title)})
         }})
         })
 }

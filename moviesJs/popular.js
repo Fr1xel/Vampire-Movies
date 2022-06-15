@@ -29,20 +29,28 @@ function HtmlDisplay(data){
     data.forEach(movie => {
     document.querySelectorAll(".click-info").forEach(div => {
         if(movie.id === div.value){
-            div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview)})
+            div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title)})
     }})
     })
 }
 
-function infoModel(title, background, overview){
+function infoModel(title, background, overview, vote_average, original_title){
+    let percent = vote_average
+    console.log(vote_average)
+    if(percent > 0){
+        percent = vote_average * 10
+    }
     const modal = document.querySelector("#viewModel")
     modal.innerHTML = `
     <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9999 darker-background text-light">
-    <div class="w-90 h-60 text-center dark-background-poster position-relative overflow-y-scroll">
+    <div class="w-90 h-60 text-center dark-background-poster position-relative overflow-y-scroll scroll-transparent border-radius">
     <button class="position-absolute tl-0 button-close"><i class="bi bi-x"></i></button>
     <div class="container">
     <h1 class="p-5">${title}</h1>
     <p class="lead p-5">${overview}</p>
+    <p class="lead"><span class="fw-bold">Original Title:</span> ${original_title}</p>
+    <p class="lead"><span class="fw-bold">Rating:</span> ${percent}%</p>
+    <p></p>
     </div>
     </div>
     </div>
