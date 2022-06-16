@@ -35,7 +35,8 @@ function HtmlDisplay(data){
 
 async function getTrailer(id){
     const json = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=ac611aa60fbb0355792b075ff8337fbe&language=en-US`).catch(err => console.log(err))
-    const data = await json.json()
+    if(json){
+        const data = await json.json()
     if(data){
         const trailer = data.results.filter(video => {
             if(video.type === "Trailer"){
@@ -43,6 +44,7 @@ async function getTrailer(id){
             }
         })
         return trailer
+    }
     }
 }
 
@@ -52,7 +54,7 @@ async function infoModel(title, background, overview, vote_average, original_tit
     modal.innerHTML = `
     <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9999 darker-background text-light">
     <div class="w-90 h-60 text-center dark-background-poster position-relative overflow-y-scroll scroll-transparent border-radius">
-    <button class="position-absolute tl-0 button-close"><i class="bi bi-x"></i></button>
+    <button class="position-absolute tl-0 button-close h1"><i class="bi bi-x"></i></button>
     <div class="container">
     <h1 class="p-5">${title}</h1>
     <p class="lead p-5">${overview}</p>
@@ -80,7 +82,7 @@ function infoModelPerson(name, background, profession, popularity, known_for){
     modal.innerHTML = `
     <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9999 darker-background text-light">
     <div class="w-90 h-60 text-center dark-background-poster position-relative overflow-y-scroll scroll-transparent border-radius">
-    <button class="position-absolute tl-0 button-close"><i class="bi bi-x"></i></button>
+    <button class="position-absolute tl-0 button-close "><i class="bi bi-x"></i></button>
     <div class="container">
     <h1 class="p-5">${name}</h1>
     <div class="known-for d-flex scroll-right-person py-3 text-center"></div>

@@ -16,18 +16,23 @@ function HtmlSetup(movie, div){
         }
         const movieDiv = document.createElement("div")
         movieDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger", "click-info", "cursor-pointer")
-        const output = `
-        <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="img-fluid border-radius">
-        <p class="lead">${movie.title}</p>
-        `
+        const p = document.createElement("p")
+        p.classList.add("lead")
+        p.innerHTML = `${movie.title}`
+        const img = document.createElement("img")
+        img.classList.add("img-fluid", "border-radius")
+        img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+        if(!movie.poster_path){
+            img.src = "/images/no-image.png"
+        }
+        movieDiv.append(img, p)
         movieDiv.value = movie.id
-        movieDiv.innerHTML = output
         div.append(movieDiv)
     })
     movie.forEach(movie => {
         document.querySelectorAll(".click-info").forEach(div => {
             if(movie.id === div.value){
-                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title)})
+                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title, movie.id)})
         }}
         )
 })
