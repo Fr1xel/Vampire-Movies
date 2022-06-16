@@ -16,20 +16,27 @@ function HtmlDisplay(data){
         const output = `
         <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="img-fluid border-radius">
         <h5 class="p-3 silver-border">${movie.title}</h5>
-        <p class="lead">
-        <span class="fw-bold">Rating:</span>
-        ${movie.vote_average}/10
-         </p>
+        <p class="lead"><span class="fw-bold">Rating:</span>
+        <span class="rating">${movie.vote_average}</span>/10</p>
         `
         popularDiv.append(div)
         div.innerHTML = output
         div.value = movie.id
-    });
+    })
     data.forEach(movie => {
     document.querySelectorAll(".click-info").forEach(div => {
         if(movie.id === div.value){
             div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title, movie.id)})
     }})
+    })
+    document.querySelectorAll(".rating").forEach(rating => {
+        rating.style.color = "lime"
+        if(rating.innerHTML < 5){
+            rating.style.color = "orange"
+        }
+        if(rating.innerHTML < 3){
+            rating.style.color = "red"
+        }
     })
 }
 
@@ -52,20 +59,45 @@ async function infoModel(title, background, overview, vote_average, original_tit
     const modal = document.querySelector("#viewModel")
     const video = await getTrailer(id)
     modal.innerHTML = `
-    <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9999 darker-background text-light">
-    <div class="w-90 h-60 text-center dark-background-poster position-relative overflow-y-scroll scroll-transparent border-radius">
-    <button class="position-absolute tl-0 button-close h1"><i class="bi bi-x"></i></button>
-    <div class="container">
+    <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9998 darker-background click-leave text-light">
+    <div class="w-90 h-60 text-center dark-background-poster border-radius position-relative z-9999">
+    <button class="position-absolute tl-0 button-close "><i class="bi bi-x h1"></i></button>
+    <div class="overflow-y-scroll scroll-transparent height-100">
+    <div class="container  iframe-place">
     <h1 class="p-5">${title}</h1>
     <p class="lead p-5">${overview}</p>
     <p class="lead"><span class="fw-bold">Original Title:</span> ${original_title}</p>
-    <p class="lead"><span class="fw-bold">Rating:</span> ${vote_average}/10</p>
-    <iframe src="https://www.youtube.com/embed/${video[0].key}" class="iframe-display" frameborder="0" autoplay="true" allowfullscreen action="DENY">
+    <p class="lead"><span class="fw-bold">Rating:</span> <span class="rating">${vote_average}</span>/10</p>
+    </div>
     </div>
     </div>
     </div>
     `
-    const iframe = document.getElementsByTagName("iframe")
+    document.querySelectorAll(".rating").forEach(rating => {
+        rating.style.color = "lime"
+        if(rating.innerHTML < 5){
+            rating.style.color = "orange"
+        }
+        if(rating.innerHTML < 3){
+            rating.style.color = "red"
+        }
+    })
+    const iframeDiv = document.querySelector(".iframe-place")
+    const iframe = document.createElement("iframe")
+    if(video[0]){
+        iframe.src = `https://www.youtube.com/embed/${video[0].key}`
+        iframe.classList.add("iframe-display")
+        iframe.frameborder = "0"
+        iframe.allowfullscreen = "true"
+        iframe.autoplay = "true"
+        iframeDiv.append(iframe)
+    }
+    const closeDiv = document.querySelector(".click-leave")
+    closeDiv.addEventListener("click", (event) => {
+        if(event.target.parentElement === modal){
+            modal.innerHTML = ""
+        }
+    })
     const infoDiv = document.querySelector(".dark-background-poster")
     infoDiv.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://image.tmdb.org/t/p/w500/${background})`
     infoDiv.style.backgroundSize = "cover"
@@ -80,9 +112,10 @@ async function infoModel(title, background, overview, vote_average, original_tit
 function infoModelPerson(name, background, profession, popularity, known_for){
     const modal = document.querySelector("#viewModel")
     modal.innerHTML = `
-    <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9999 darker-background text-light">
-    <div class="w-90 h-60 text-center dark-background-poster position-relative overflow-y-scroll scroll-transparent border-radius">
-    <button class="position-absolute tl-0 button-close "><i class="bi bi-x"></i></button>
+    <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9998 darker-background click-leave text-light">
+    <div class="w-90 h-60 text-center dark-background-poster border-radius position-relative z-9999">
+    <button class="position-absolute tl-0 button-close "><i class="bi bi-x h1"></i></button>
+    <div class="overflow-y-scroll scroll-transparent height-100">
     <div class="container">
     <h1 class="p-5">${name}</h1>
     <div class="known-for d-flex scroll-right-person py-3 text-center"></div>
@@ -92,7 +125,14 @@ function infoModelPerson(name, background, profession, popularity, known_for){
     </div>
     </div>
     </div>
+    </div>
     `
+    const closeDiv = document.querySelector(".click-leave")
+    closeDiv.addEventListener("click", (event) => {
+        if(event.target.parentElement === modal){
+            modal.innerHTML = ""
+        }
+    })
     const knownDiv = document.querySelector(".known-for")
     HtmlSetup(known_for, knownDiv)
     const infoDiv = document.querySelector(".dark-background-poster")

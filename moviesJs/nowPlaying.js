@@ -15,19 +15,30 @@ function HtmlSetup(movie, div){
             movie.title = movie.name
         }
         const movieDiv = document.createElement("div")
+        const p2 = document.createElement("p")
+        p2.innerHTML = `<span class="fw-bold">Rating:</span> <span class="rating">${movie.vote_average}</span>/10`
         movieDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger", "click-info", "cursor-pointer")
-        const p = document.createElement("p")
-        p.classList.add("lead")
-        p.innerHTML = `${movie.title}`
+        const h5 = document.createElement("h5")
+        h5.innerHTML = `${movie.title}`
+        h5.classList.add("p-3", "silver-border")
         const img = document.createElement("img")
         img.classList.add("img-fluid", "border-radius")
         img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
         if(!movie.poster_path){
             img.src = "/images/no-image.png"
         }
-        movieDiv.append(img, p)
+        movieDiv.append(img, h5, p2)
         movieDiv.value = movie.id
         div.append(movieDiv)
+    })
+    document.querySelectorAll(".rating").forEach(rating => {
+        rating.style.color = "lime"
+        if(rating.innerHTML < 5){
+            rating.style.color = "orange"
+        }
+        if(rating.innerHTML < 3){
+            rating.style.color = "red"
+        }
     })
     movie.forEach(movie => {
         document.querySelectorAll(".click-info").forEach(div => {

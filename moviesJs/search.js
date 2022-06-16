@@ -50,7 +50,7 @@ function searchHtmlBuild(data){
     data.forEach(movie => {
         const p = document.createElement("h5")
         const p2 = document.createElement("p")
-        p2.innerHTML = `<span class="fw-bold">Rating:</span> ${movie.vote_average}/10`
+        p2.innerHTML = `<span class="fw-bold">Rating:</span> <span class="rating">${movie.vote_average}</span>/10`
         p.innerHTML = `${movie.title}`
         const imageDiv = document.createElement("div")
         imageDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger", "click-info")
@@ -69,11 +69,20 @@ function searchHtmlBuild(data){
         if(!movie.poster_path){
             img.src = "/images/no-image.png"
         }
+        document.querySelectorAll(".rating").forEach(rating => {
+            rating.style.color = "lime"
+            if(rating.innerHTML < 5){
+                rating.style.color = "orange"
+            }
+            if(rating.innerHTML < 3){
+                rating.style.color = "red"
+            }
+        })
     })
     data.forEach(movie => {
         document.querySelectorAll(".click-info").forEach(div => {
             if(movie.id === div.value){
-                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title)})
+                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title, movie.id)})
         }})
         })
     }
