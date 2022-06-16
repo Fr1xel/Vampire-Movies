@@ -11,6 +11,9 @@ async function NowPlayingFetch(){
 
 function HtmlSetup(movie, div){
     movie.forEach(movie => {
+        if(!movie.title){
+            movie.title = movie.name
+        }
         const movieDiv = document.createElement("div")
         movieDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger", "click-info", "cursor-pointer")
         const output = `

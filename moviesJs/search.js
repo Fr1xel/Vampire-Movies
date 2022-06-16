@@ -3,7 +3,6 @@ const searchBarPeople = document.querySelector("#peopleSearch")
 const searchDiv = document.querySelector("#searchDiv")
 
 function searchType(event){
-    console.log(event)
     if(event.keyCode === 13){
         event.preventDefault()
         if(searchBarFilms.value.length < 3 || searchBarPeople.value.length < 3){
@@ -12,7 +11,6 @@ function searchType(event){
     }
     else{
         if(searchBarFilms.value.length > 2 || searchBarPeople.value.length > 2){
-            console.log(event)
             getSearch(event)
         }
         else{
