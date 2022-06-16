@@ -28,13 +28,27 @@ function HtmlDisplay(data){
     data.forEach(movie => {
     document.querySelectorAll(".click-info").forEach(div => {
         if(movie.id === div.value){
-            div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title)})
+            div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title, movie.id)})
     }})
     })
 }
 
-function infoModel(title, background, overview, vote_average, original_title){
+async function getTrailer(id){
+    const json = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=ac611aa60fbb0355792b075ff8337fbe&language=en-US`).catch(err => console.log(err))
+    const data = await json.json()
+    if(data){
+        const trailer = data.results.filter(video => {
+            if(video.type === "Trailer"){
+                return video
+            }
+        })
+        return trailer
+    }
+}
+
+async function infoModel(title, background, overview, vote_average, original_title, id){
     const modal = document.querySelector("#viewModel")
+    const video = await getTrailer(id)
     modal.innerHTML = `
     <div class="vw-100 vh-100 d-flex flex-column justify-content-center align-items-center position-fixed-center z-9999 darker-background text-light">
     <div class="w-90 h-60 text-center dark-background-poster position-relative overflow-y-scroll scroll-transparent border-radius">
@@ -44,11 +58,12 @@ function infoModel(title, background, overview, vote_average, original_title){
     <p class="lead p-5">${overview}</p>
     <p class="lead"><span class="fw-bold">Original Title:</span> ${original_title}</p>
     <p class="lead"><span class="fw-bold">Rating:</span> ${vote_average}/10</p>
-    <p></p>
+    <iframe src="https://www.youtube.com/embed/${video[0].key}" class="iframe-display" frameborder="0" autoplay="true" allowfullscreen action="DENY">
     </div>
     </div>
     </div>
     `
+    const iframe = document.getElementsByTagName("iframe")
     const infoDiv = document.querySelector(".dark-background-poster")
     infoDiv.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://image.tmdb.org/t/p/w500/${background})`
     infoDiv.style.backgroundSize = "cover"

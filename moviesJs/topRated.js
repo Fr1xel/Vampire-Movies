@@ -18,17 +18,25 @@ function topRatedHtml(data){
         <h5 class="p-3 silver-border">${movie.title}</h5>
         <p class="lead">
         <span class="fw-bold">Rating:</span>
-        ${movie.vote_average}/10
+        <span class="vote-color">${movie.vote_average}</span>/10
          </p>
         `
         movieDiv.innerHTML = output
         topDiv.append(movieDiv)
         movieDiv.value = movie.id
+        const vote = document.querySelector(".vote-color")
+    vote.style.color = "lime"
+    if(movie.vote_average < 5){
+        vote.style.color = "orange"
+    }
+    if(movie.vote_average < 3){
+        vote.style.color = "red"
+    }
     });
     data.forEach(movie => {
         document.querySelectorAll(".click-info").forEach(div => {
             if(movie.id === div.value){
-                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title)})
+                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title, movie.id)})
         }})
         })
 }

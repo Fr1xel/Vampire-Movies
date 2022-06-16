@@ -3,6 +3,7 @@ const searchBarPeople = document.querySelector("#peopleSearch")
 const searchDiv = document.querySelector("#searchDiv")
 
 function searchType(event){
+    console.log(event)
     if(event.keyCode === 13){
         event.preventDefault()
         if(searchBarFilms.value.length < 3 || searchBarPeople.value.length < 3){
@@ -31,7 +32,6 @@ async function getSearch(event) {
     const data = await json.json().catch(err => console.log(err))
     if(data){
         if(event.target.id === "peopleSearch"){
-            console.log(data)
             searchPepleHtmlBuild(data.results)
         }
         else{
@@ -119,5 +119,5 @@ function searchPepleHtmlBuild(data){
     }
 }
 
-searchBarFilms.addEventListener("keypress", searchType)
-searchBarPeople.addEventListener("keypress", searchType)
+searchBarFilms.addEventListener("keydown", searchType)
+searchBarPeople.addEventListener("keydown", searchType)
