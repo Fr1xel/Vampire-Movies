@@ -2,7 +2,7 @@ const topUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=ac611aa60fb
 const topDiv = document.querySelector("#topRated")
 
 async function topRatedFetch(){
-    const content = await fetch(topUrl).catch(console.log("error"))
+    const content = await fetch(topUrl).catch(err => console.log(err))
     const data = await content.json()
     if(data){
         topRatedHtml(data.results)
@@ -11,7 +11,6 @@ async function topRatedFetch(){
 
 function topRatedHtml(data){
     data.forEach(movie => {
-        const percent = movie.vote_average * 10
         const movieDiv = document.createElement("div")
         movieDiv.classList.add("col-lg-3", "col-md-6", "col-12", "cursor-pointer", "hover-bigger", "max-width-100", "click-info")
         const output = `
@@ -19,7 +18,7 @@ function topRatedHtml(data){
         <h5 class="p-3 silver-border">${movie.title}</h5>
         <p class="lead">
         <span class="fw-bold">Rating:</span>
-         ${percent}%
+        ${movie.vote_average}/10
          </p>
         `
         movieDiv.innerHTML = output

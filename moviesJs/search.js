@@ -1,26 +1,42 @@
 const searchBarFilms = document.querySelector("#movieSearch")
+const searchBarPeople = document.querySelector("#peopleSearch")
 const searchDiv = document.querySelector("#searchDiv")
 
 function searchType(event){
     if(event.keyCode === 13){
         event.preventDefault()
-        getSearch()
+        if(searchBarFilms.value.length < 3 || searchBarPeople.value.length < 3){
+            searchDiv.innerHTML = ""
+        }
     }
     else{
-        if(searchBarFilms.value.length > 2){
-            getSearch()
+        if(searchBarFilms.value.length > 2 || searchBarPeople.value.length > 2){
+            console.log(event)
+            getSearch(event)
         }
         else{
-            searchContent.innerHTML = ""
+            searchDiv.innerHTML = ""
         }
     }
 }
 
-async function getSearch() {
-    const json = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=ac611aa60fbb0355792b075ff8337fbe&language=en-US&query=${searchBarFilms.value}&page=1&include_adult=false`)
+async function getSearch(event) {
+    let type = "movie"
+    let search = searchBarFilms.value
+    if(event.target.id === "peopleSearch"){
+        type = "person"
+        search = searchBarPeople.value
+    }
+    const json = await fetch(`https://api.themoviedb.org/3/search/${type}?api_key=ac611aa60fbb0355792b075ff8337fbe&language=en-US&query=${search}&page=1&include_adult=false`)
     const data = await json.json().catch(err => console.log(err))
     if(data){
-        searchHtmlBuild(data.results)
+        if(event.target.id === "peopleSearch"){
+            console.log(data)
+            searchPepleHtmlBuild(data.results)
+        }
+        else{
+            searchHtmlBuild(data.results)
+        }
     }
 }
 
@@ -32,14 +48,11 @@ function searchHtmlBuild(data){
         </div>
     `
     const searchContent = document.querySelector("#searchContent")
+    if(data){
     data.forEach(movie => {
-        let percent = movie.vote_average * 10
-        if(movie.vote_average > 0){
-            percent = movie.vote_average * 10
-        }
         const p = document.createElement("h5")
         const p2 = document.createElement("p")
-        p2.innerHTML = `<span class="fw-bold">Rating:</span> ${percent}%`
+        p2.innerHTML = `<span class="fw-bold">Rating:</span> ${movie.vote_average}/10`
         p.innerHTML = `${movie.title}`
         const imageDiv = document.createElement("div")
         imageDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger", "click-info")
@@ -48,7 +61,6 @@ function searchHtmlBuild(data){
         img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
         img.classList.add("img-fluid")
         img.classList.add("border-radius")
-        img.id = "searchImage"
         imageDiv.append(img)
         searchContent.append(imageDiv)
         imageDiv.append(p)
@@ -66,6 +78,46 @@ function searchHtmlBuild(data){
                 div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title)})
         }})
         })
+    }
+    else{
+        searchContent.innerHTML = `
+        <div class="container text-center text-secondary">
+        <h3 class="">No results found</h1>
+        <i class="bi bi-x-circle color-red h1"></i>
+        <h5>Please make sure you put a proppper name</h2>
+        </div>
+        `
+    }
+}
+
+function searchPepleHtmlBuild(data){
+    searchDiv.innerHTML = `
+    <div class="container">
+        <h1 class="color-red">Search results <i class="bi bi-search"></i></h1>
+        <div class="d-flex scroll-right py-3 text-center" id="searchContent">
+        </div>
+    `
+    const searchContent = document.querySelector("#searchContent")
+    if(data){
+        data.forEach(person => {
+            const imageDiv = document.createElement("div")
+        imageDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger", "click-info")
+        const h5 = document.createElement("h5")
+        h5.innerHTML = `${person.name}`
+        const img = document.createElement("img")
+        img.src = `https://image.tmdb.org/t/p/w500/${person.profile_path}`
+        img.classList.add("img-fluid", "border-radius")
+        imageDiv.append(img)
+        imageDiv.append(h5)
+        imageDiv.value = person.id
+        searchContent.append(imageDiv)
+        if(!person.profile_path){
+            img.src = "/images/no-image.png"
+        }
+        imageDiv.addEventListener("click", () => {infoModelPerson(person.name, person.profile_path, person.known_for_department, person.popularity, person.known_for)})
+        })
+    }
 }
 
 searchBarFilms.addEventListener("keypress", searchType)
+searchBarPeople.addEventListener("keypress", searchType)

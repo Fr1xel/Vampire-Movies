@@ -2,14 +2,14 @@ const nowUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=ac611aa60
 const nowDiv = document.querySelector("#nowPlaying")
 
 async function NowPlayingFetch(){
-    const json = await fetch(nowUrl).catch(console.log("error"))
+    const json = await fetch(nowUrl).catch(err => console.log(err))
     const data = await json.json()
     if(data){
-        HtmlSetup(data.results)
+        HtmlSetup(data.results, nowDiv)
     }
 }
 
-function HtmlSetup(movie){
+function HtmlSetup(movie, div){
     movie.forEach(movie => {
         const movieDiv = document.createElement("div")
         movieDiv.classList.add("col-lg-2", "col-md-4", "col-6", "mx-4", "d-inline-block", "hover-bigger", "click-info", "cursor-pointer")
@@ -19,7 +19,7 @@ function HtmlSetup(movie){
         `
         movieDiv.value = movie.id
         movieDiv.innerHTML = output
-        nowDiv.append(movieDiv)
+        div.append(movieDiv)
     })
     movie.forEach(movie => {
         document.querySelectorAll(".click-info").forEach(div => {
