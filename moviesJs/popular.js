@@ -20,7 +20,7 @@ function HtmlDisplay(data) {
       "cursor-pointer",
       "hover-bigger",
       "max-width-100",
-      "click-info"
+      "click-info-popular"
     );
     const output = `
         <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="img-fluid border-radius">
@@ -32,24 +32,9 @@ function HtmlDisplay(data) {
     div.innerHTML = output;
     div.value = movie.id;
   });
-  data.forEach((movie) => {
-    document.querySelectorAll(".click-info").forEach((div) => {
-      if (movie.id === div.value) {
-        div.addEventListener("click", () => {
-          infoModel(movie);
-        });
-      }
-    });
-  });
-  document.querySelectorAll(".rating").forEach((rating) => {
-    rating.style.color = "lime";
-    if (rating.innerHTML < 5) {
-      rating.style.color = "orange";
-    }
-    if (rating.innerHTML < 3) {
-      rating.style.color = "red";
-    }
-  });
+  const divs = document.querySelectorAll(".click-info-popular")
+  divInfoModelAdder(divs, data)
+ ratingColor()
 }
 
 async function getTrailer(id) {
@@ -174,6 +159,18 @@ function buttonCloseEventListener() {
   document
     .querySelector(".button-close")
     .addEventListener("click", () => (modal.innerHTML = ""));
+}
+
+function divInfoModelAdder(divs, data){
+  data.forEach((movie) => {
+    divs.forEach((div) => {
+      if (movie.id === div.value) {
+        div.addEventListener("click", () => {
+          infoModel(movie);
+        });
+      }
+    });
+  });
 }
 
 PopularMoviesFetch();

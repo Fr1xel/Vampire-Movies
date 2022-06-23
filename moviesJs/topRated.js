@@ -12,7 +12,7 @@ async function topRatedFetch(){
 function topRatedHtml(data){
     data.forEach(movie => {
         const movieDiv = document.createElement("div")
-        movieDiv.classList.add("col-lg-3", "col-md-6", "col-12", "cursor-pointer", "hover-bigger", "max-width-100", "click-info")
+        movieDiv.classList.add("col-lg-3", "col-md-6", "col-12", "cursor-pointer", "hover-bigger", "max-width-100", "click-info-top-rated")
         const output = `
         <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="img-fluid border-radius">
         <h5 class="p-3 silver-border">${movie.title}</h5>
@@ -22,21 +22,9 @@ function topRatedHtml(data){
         topDiv.append(movieDiv)
         movieDiv.value = movie.id
     })
-    document.querySelectorAll(".rating").forEach(rating => {
-        rating.style.color = "lime"
-        if(rating.innerHTML < 5){
-            rating.style.color = "orange"
-        }
-        if(rating.innerHTML < 3){
-            rating.style.color = "red"
-        }
-    })
-    data.forEach(movie => {
-        document.querySelectorAll(".click-info").forEach(div => {
-            if(movie.id === div.value){
-                div.addEventListener("click", () => {infoModel(movie.title, movie.backdrop_path, movie.overview, movie.vote_average, movie.original_title, movie.id)})
-        }})
-        })
+    ratingColor()
+    const divs = document.querySelectorAll(".click-info-top-rated")
+    divInfoModelAdder(divs, data)
 }
 
 topRatedFetch()
