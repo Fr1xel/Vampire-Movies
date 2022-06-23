@@ -4,7 +4,7 @@
     overflow-y: hidden;
 }
 .scroll-right::-webkit-scrollbar{
-    background-color: black;
+    background-color: transparent;
     height:10px;
 }
 .scroll-right::-webkit-scrollbar-thumb{

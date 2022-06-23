@@ -4,7 +4,7 @@ body::before{
     height: 60px;
 }
 body::-webkit-scrollbar{
-    background-color:black;
+    background-color:transparent;
     width:10px;
 
 }
@@ -13,7 +13,7 @@ body::-webkit-scrollbar-thumb{
     border-radius:1rem;
 }
 body{
-    background-color:black;
+    background-color:rgb(13, 13, 13);
 }
 .z-9999{
     z-index:9999;
@@ -52,8 +52,9 @@ body{
 .width-manager{
     width:80%;
 }
-.black-background{
-    background-color: black;
+.nav-background{
+    box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px;
+    background-color: rgb(20, 20, 20);
 }
 .redder-text{
     color:red;
